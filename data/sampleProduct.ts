@@ -4,11 +4,11 @@ export const sampleProducts: Product[] = [
   {
     id: 10,
     name: {
-      en: "Ladies Red T-shirt, Pant Set Stylish Dress",
+      en: "Ladies Red Western Suit",
     },
-    slug: "ladies-red-t-shirt-pant-set-stylish-dress",
+    slug: "ladies-red-western-suit",
     description: {
-      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস টপ-বটম সেট (রেড কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
+      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস ওয়েস্টার্ন স্যুট (রেড কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
     },
     status: "published",
     is_active: true,
@@ -57,11 +57,11 @@ export const sampleProducts: Product[] = [
   {
     id: 11,
     name: {
-      en: "Ladies White T-shirt, Pant Set Stylish Dress",
+      en: "Ladies White Western Suit",
     },
-    slug: "ladies-white-t-shirt-pant-set-stylish-dress",
+    slug: "ladies-white-western-suit",
     description: {
-      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস টপ-বটম সেট (হোয়াইট কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
+      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস ওয়েস্টার্ন স্যুট (হোয়াইট কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
     },
     status: "published",
     is_active: true,
@@ -110,11 +110,11 @@ export const sampleProducts: Product[] = [
   {
     id: 12,
     name: {
-      en: "Ladies Black T-shirt, Pant Set Stylish Dress",
+      en: "Ladies Black Western Suit",
     },
-    slug: "ladies-black-t-shirt-pant-set-stylish-dress",
+    slug: "ladies-black-western-suit",
     description: {
-      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস টপ-বটম সেট (ব্ল্যাক কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
+      en: "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস লেডিস ওয়েস্টার্ন স্যুট (ব্ল্যাক কালার)। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex)।",
     },
     status: "published",
     is_active: true,

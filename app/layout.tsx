@@ -8,10 +8,10 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title:
     process.env.NEXT_PUBLIC_SITE_TITLE ||
-    "প্রিমিয়াম উইমেন্স ২-পিস সেট (Scuda Crave) | PJ Fashion",
+    "প্রিমিয়াম উইমেন্স ওয়েস্টার্ন স্যুট (Western Suit) | PJ Fashion",
   description:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ২-পিস টপ ও ট্রাউজার সেট। চায়না ইম্পোর্টেড Scuda Crave (250 GSM, 95% Polyester, 5% Spandex) ফেব্রিক ও ক্যাশ অন ডেলিভারি সুবিধা।",
+    "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ওয়েস্টার্ন স্যুট ২-পিস সেট। চায়না ইম্পোর্টেড Scuda Crave (250 GSM, 95% Polyester, 5% Spandex) ফেব্রিক ও ক্যাশ অন ডেলিভারি সুবিধা।",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },

@@ -5,7 +5,6 @@ import SizeChartSection from "@/fashion4/sections/SizeChartSection";
 import OrderFormSection from "@/fashion4/sections/OrderFormSection";
 import FooterSection from "@/fashion4/sections/FooterSection";
 import WhyDifferentSection from "@/fashion4/sections/WhyDifferentSection";
-import StickyMobileBar from "@/components/StickyMobileBar";
 import { fetchLandingProducts } from "@/lib/fetchProducts";
 
 export default async function Home() {
@@ -20,7 +19,6 @@ export default async function Home() {
       <SizeChartSection products={products} />
       <OrderFormSection products={products} />
       <FooterSection />
-      <StickyMobileBar products={products} />
     </main>
   );
 }

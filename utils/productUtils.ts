@@ -111,3 +111,11 @@ export const getProductImage = (
   }
   return getProductColorInfo(product, index).fallbackImage;
 };
+
+export const formatProductTitle = (name?: string): string => {
+  if (!name) return "Western Suit";
+  return name
+    .replace(/t-shirt,?\s*pant\s*set\s*(stylish\s*dress)?/gi, "Western Suit")
+    .replace(/t-shirt/gi, "Western Suit")
+    .replace(/টি-শার্ট/gi, "ওয়েস্টার্ন স্যুট");
+};

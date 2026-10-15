@@ -6,7 +6,6 @@ import SizeChartSection from "./sections/SizeChartSection";
 import OrderFormSection from "./sections/OrderFormSection";
 import FooterSection from "./sections/FooterSection";
 import WhyDifferentSection from "./sections/WhyDifferentSection";
-import StickyMobileBar from "@/components/StickyMobileBar";
 
 export default async function Index() {
   const products = await fetchLandingProducts();
@@ -20,7 +19,6 @@ export default async function Index() {
       <SizeChartSection products={products} />
       <OrderFormSection products={products} />
       <FooterSection />
-      <StickyMobileBar products={products} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 const FooterSection = () => {
-  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01905000043";
+  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
   const currentYear = new Date().getFullYear();
   const copyright =
     process.env.NEXT_PUBLIC_FOOTER_COPYRIGHT ||

@@ -12,7 +12,7 @@ interface WhyDifferentSectionProps {
 const WhyDifferentSection = ({ products }: WhyDifferentSectionProps) => {
   const title =
     process.env.NEXT_PUBLIC_WHY_DIFFERENT_TITLE ||
-    "কেন আমাদের টি-শার্টগুলো অন্যদের থেকে আলাদা";
+    "কেন আমাদের ওয়েস্টার্ন স্যুট অন্যদের থেকে আলাদা";
 
   const buttonText =
     process.env.NEXT_PUBLIC_WHY_DIFFERENT_BUTTON_TEXT || "অর্ডার করুন";

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Product } from "@/types/ProductType";
 import { useStore } from "@/context/StoreContent";
 import { parsePrice } from "@/utils/parsePrice";
-import { getProductColorInfo, getProductImage, getProductPrices } from "@/utils/productUtils";
+import { getProductColorInfo, getProductImage, getProductPrices, formatProductTitle } from "@/utils/productUtils";
 
 export default function CartItemProduct({
   product,
@@ -82,7 +82,7 @@ export default function CartItemProduct({
           items: [
             {
               item_id: product.id,
-              item_name: product?.name?.en || colorInfo.name,
+              item_name: formatProductTitle(product?.name?.en) || colorInfo.name,
               price: pricing.sellingPrice,
               quantity: product.quantity || 1,
               item_variant: selectedSize,
@@ -127,7 +127,7 @@ export default function CartItemProduct({
         <div className="shrink-0 relative w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
           <Image
             src={imgSrc}
-            alt={product.name?.en || colorInfo.name}
+            alt={formatProductTitle(product.name?.en) || colorInfo.name}
             fill
             className="object-cover"
             onError={() => {
@@ -142,7 +142,7 @@ export default function CartItemProduct({
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
             <h4 className="text-neutral-900 text-sm sm:text-base font-display font-semibold leading-snug">
-              {product.name?.en || colorInfo.name}
+              {formatProductTitle(product.name?.en) || colorInfo.name}
             </h4>
 
             {/* Price from API */}

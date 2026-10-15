@@ -10,17 +10,17 @@ interface SizeChartSectionProps {
 
 const SizeChartSection = ({ products }: SizeChartSectionProps) => {
   const title =
-    process.env.NEXT_PUBLIC_SIZE_CHART_TITLE || "সাইজ চার্ট ও ফেব্রিক বিবরণ";
+    process.env.NEXT_PUBLIC_SIZE_CHART_TITLE || "সাইজ চার্ট নির্দেশিকা";
   const noteText =
     process.env.NEXT_PUBLIC_SIZE_CHART_NOTE ||
     "অবশ্যই ১০০% কনফার্ম হয়ে অর্ডারটি করবেন। সাইজে প্রবলেম হলে অথবা অন্য কোন সমস্যা হলে রিটার্ন বা এক্সচেঞ্জ করে নিতে পারবেন ৩ দিনের ভেতরে। প্রয়োজনে যোগাযোগ করুনঃ";
   const phone =
-    process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01905000043";
+    process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
 
   const whatsappText =
     process.env.NEXT_PUBLIC_WHATSAPP_TEXT || "যেকোন প্রয়োজনে";
   const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801905 000043";
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
   const whatsappLink =
     process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
     `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;
@@ -30,32 +30,6 @@ const SizeChartSection = ({ products }: SizeChartSectionProps) => {
     process.env.NEXT_PUBLIC_SIZE_CHART_IMAGE ||
     "/images/size-guide/SizeGuide_LadiesTop.png";
 
-  const fabricSpecs = [
-    {
-      label: "ফেব্রিক / উপাদান",
-      value: "Scuda Crave",
-      subtext: "চায়না থেকে সরাসরি ইম্পোর্টেড",
-      icon: "✨",
-    },
-    {
-      label: "ফেব্রিক থিকনেস",
-      value: "250 GSM",
-      subtext: "ভারী ও নন-সি-থ্রু প্রিমিয়াম কোয়ালিটি",
-      icon: "⚖️",
-    },
-    {
-      label: "কম্পোজিশন",
-      value: "95% Poly + 5% Spandex",
-      subtext: "পারফেক্ট ৪-ওয়ে হাই-স্ট্রেচেবল",
-      icon: "🧵",
-    },
-    {
-      label: "স্পেশাল ফিচার্স",
-      value: "সফট ও রিঙ্কেল-ফ্রি",
-      subtext: "১০০% আরামদায়ক ও কালার গ্যারান্টি",
-      icon: "👌",
-    },
-  ];
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-white border-b border-neutral-100">
@@ -66,7 +40,7 @@ const SizeChartSection = ({ products }: SizeChartSectionProps) => {
             {title}
           </h2>
           <p className="mt-2 text-sm sm:text-base text-neutral-600 font-normal font-body">
-            সঠিক সাইজ বেছে নিতে মেজারমেন্ট চার্ট ও প্রিমিয়াম ফেব্রিক বিবরণ দেখে নিন
+            সঠিক সাইজ বেছে নিতে মেজারমেন্ট চার্ট দেখে নিন
           </p>
         </div>
 
@@ -160,50 +134,6 @@ const SizeChartSection = ({ products }: SizeChartSectionProps) => {
                 </span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Clean & Consistent Fabric Specifications Block */}
-        <div className="max-w-5xl mx-auto mb-8 sm:mb-10 bg-[#FAFBFD] rounded-2xl p-5 sm:p-7 border border-neutral-200/80 shadow-2xs">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 pb-4 border-b border-neutral-200/80">
-            <div className="flex items-center gap-3">
-              <div className="w-7 h-7 rounded-full bg-yellow-400 text-neutral-950 flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
-                ✓
-              </div>
-              <div>
-                <h3 className="font-display font-semibold text-neutral-900 text-base sm:text-lg">
-                  ফেব্রিক ও ম্যাটেরিয়াল বিবরণ
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 font-body">
-                  চায়না ইম্পোর্টেড প্রিমিয়াম কোয়ালিটি ফেব্রিক
-                </p>
-              </div>
-            </div>
-            <span className="self-start sm:self-auto inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-900 border border-yellow-200/80">
-              ১০০% কোয়ালিটি গ্যারান্টি
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {fabricSpecs.map((spec, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-4 border border-neutral-200/80 shadow-2xs flex flex-col justify-between hover:border-neutral-300 transition-colors"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-neutral-500 text-xs font-body">{spec.label}</span>
-                  <span className="text-base">{spec.icon}</span>
-                </div>
-                <div>
-                  <p className="font-display font-semibold text-neutral-900 text-sm sm:text-base leading-snug">
-                    {spec.value}
-                  </p>
-                  <p className="text-xs text-neutral-600 font-body mt-1 leading-relaxed">
-                    {spec.subtext}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 

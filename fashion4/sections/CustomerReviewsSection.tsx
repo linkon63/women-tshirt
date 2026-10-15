@@ -26,7 +26,7 @@ const CustomerReviewsSection = () => {
   const whatsappText =
     process.env.NEXT_PUBLIC_WHATSAPP_TEXT || "যেকোন প্রয়োজনে";
   const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801905 000043";
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
   const whatsappLink =
     process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
     `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;

@@ -7,7 +7,7 @@ import { API_BASE_URL } from "@/config/general.config";
 import CartItemProduct from "./CartItemProduct";
 import { useRouter } from "next/navigation";
 import { Product, FormErrors, ShippingOption, OrderApiData } from "@/types/ProductType";
-import { getProductColorInfo, getProductImage, getProductPrices } from "@/utils/productUtils";
+import { getProductColorInfo, getProductImage, getProductPrices, formatProductTitle } from "@/utils/productUtils";
 
 interface OrderFormSectionProps {
   products?: Product[];
@@ -84,7 +84,7 @@ const OrderFormSection = ({
           value: subtotal,
           items: selectedProducts.map((item) => ({
             item_id: item.id,
-            item_name: item.name?.en || "Product",
+            item_name: formatProductTitle(item.name?.en) || "Western Suit",
             price: getItemUnitPrice(item),
             quantity: item.quantity || 1,
             item_variant: item.selectedSize || "M",
@@ -637,14 +637,14 @@ const OrderFormSection = ({
                         <div className="relative w-12 h-14 rounded-lg overflow-hidden bg-neutral-100 border border-neutral-200 shrink-0">
                           <Image
                             src={getProductImage(item, idx)}
-                            alt={item.name?.en || "Product"}
+                            alt={formatProductTitle(item.name?.en) || "Western Suit"}
                             fill
                             className="object-cover"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-display font-medium text-sm text-neutral-900 truncate">
-                            {item.name?.en}
+                            {formatProductTitle(item.name?.en)}
                           </p>
                           <p className="font-body text-xs text-neutral-500 font-normal">
                             {item.selectedSize ? `সাইজ: ${item.selectedSize}` : ""}{" "}

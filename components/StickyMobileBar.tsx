@@ -13,7 +13,7 @@ export default function StickyMobileBar({ products }: StickyMobileBarProps) {
   const [visible, setVisible] = useState(false);
 
   const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801905 000043";
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
   const whatsappLink =
     process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
     `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;

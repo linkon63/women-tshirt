@@ -1,6 +1,7 @@
 import { Product, ProductDetailsResponse } from "@/types/ProductType";
 import { API_BASE_URL } from "@/config/general.config";
 import sampleProduct, { sampleProducts } from "@/data/sampleProduct";
+import { formatProductTitle } from "@/utils/productUtils";
 
 export async function fetchProductById(
   id?: string | number
@@ -21,6 +22,9 @@ export async function fetchProductById(
       const product = json.data || json;
 
       if (product?.id) {
+        if (product.name?.en) {
+          product.name.en = formatProductTitle(product.name.en);
+        }
         return product as Product;
       }
     }

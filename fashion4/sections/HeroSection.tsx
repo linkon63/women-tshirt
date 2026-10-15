@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/ProductType";
-import { getProductColorInfo, getProductImage, getProductPrices } from "@/utils/productUtils";
+import { getProductColorInfo, getProductImage, getProductPrices, formatProductTitle } from "@/utils/productUtils";
 
 interface HeroSectionProps {
   products?: Product[];
@@ -13,21 +13,21 @@ interface HeroSectionProps {
 const defaultVariants = [
   {
     id: "10",
-    name: "Ladies Red T-shirt, Pant Set",
+    name: "Ladies Red Western Suit",
     bnName: "রেড",
     src: "https://hishabi-dev.s3.ap-south-1.amazonaws.com/tenant/pjfashion/product/31/Cv2VdsgSvf2s2LKDWK9QUXN6sOw2x8c9nE33dgmx.webp",
     fallbackSrc: "/images/t-shirt/red-tshirt.webp",
   },
   {
     id: "11",
-    name: "Ladies White T-shirt, Pant Set",
+    name: "Ladies White Western Suit",
     bnName: "হোয়াইট",
     src: "https://hishabi-dev.s3.ap-south-1.amazonaws.com/tenant/pjfashion/product/33/qz2IEDklPRzMOk3TCx3geFQcgqrbihnQVBFlvF8S.webp",
     fallbackSrc: "/images/t-shirt/white-tshirt.webp",
   },
   {
     id: "12",
-    name: "Ladies Black T-shirt, Pant Set",
+    name: "Ladies Black Western Suit",
     bnName: "ব্ল্যাক",
     src: "https://hishabi-dev.s3.ap-south-1.amazonaws.com/tenant/pjfashion/product/35/XqQvqcHgVBMF8zK8ZImHt0mfjN6HJJb7WJvOKHz3.webp",
     fallbackSrc: "/images/t-shirt/black-tshirt.webp",
@@ -41,11 +41,11 @@ const HeroSection = ({ products }: HeroSectionProps) => {
     process.env.NEXT_PUBLIC_HERO_TITLE_PART2 || "আনুন নতুনত্ব";
   const description =
     process.env.NEXT_PUBLIC_HERO_DESCRIPTION ||
-    "প্রিমিয়াম আরাম ও আধুনিক ফ্যাশনের পারফেক্ট কম্বিনেশন - এক্সক্লুসিভ ২-পিস টপ ও ট্রাউজার সেট। চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM, 95% Polyester, 5% Spandex) ও আরামদায়ক বডি ফিটিংস।";
+    "প্রিমিয়াম আরাম ও আধুনিক ফ্যাশনের পারফেক্ট কম্বিনেশন - নিখুঁত ফিনিশিং এবং আকর্ষণীয় ডিজাইন।";
   const buttonText =
     process.env.NEXT_PUBLIC_HERO_BUTTON_TEXT || "অর্ডার করুন";
   const watermarkText =
-    process.env.NEXT_PUBLIC_HERO_WATERMARK || "T-SHIRT";
+    process.env.NEXT_PUBLIC_HERO_WATERMARK || "WESTERN SUIT";
 
   // Build variants from API products if available
   const variants =
@@ -55,7 +55,7 @@ const HeroSection = ({ products }: HeroSectionProps) => {
           const imgSrc = getProductImage(prod, idx);
           return {
             id: prod.id.toString(),
-            name: prod.name?.en || colorInfo.name,
+            name: formatProductTitle(prod.name?.en) || colorInfo.name,
             bnName: colorInfo.bnName,
             src: imgSrc,
             fallbackSrc: colorInfo.fallbackImage,
@@ -163,7 +163,7 @@ const HeroSection = ({ products }: HeroSectionProps) => {
                   <Image
                     key={selectedVariant?.id}
                     src={imgSrc || selectedVariant?.src}
-                    alt={selectedVariant?.name || "Women T-shirt"}
+                    alt={selectedVariant?.name || "Women Western Suit"}
                     fill
                     className="object-cover transition-opacity duration-500"
                     priority

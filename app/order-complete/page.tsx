@@ -9,7 +9,7 @@ function OrderCompleteContent() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("orderNumber");
   const message = searchParams.get("message");
-  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01905000043";
+  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
 
   return (
     <div className="min-h-screen bg-neutral-50/70 flex flex-col justify-center items-center px-4 py-12">
