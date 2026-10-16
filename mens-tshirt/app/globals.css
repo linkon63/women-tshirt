@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-ink font-body antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.65;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Bangla glyphs have tall matras & descenders – clean weight, open line height */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink font-semibold;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-ink;
+  }
+
+  [id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Components / design system                                         */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Layout */
+  .container-x {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-y {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  /* Typography - Clean, non-bold, relaxed leading */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 font-body text-xs sm:text-sm font-medium text-brand-800;
+  }
+
+  .heading-hero {
+    @apply font-display font-semibold text-ink text-[28px] leading-[1.4] sm:text-4xl sm:leading-[1.38] lg:text-[46px] lg:leading-[1.32];
+  }
+
+  .section-heading {
+    @apply font-display font-semibold text-ink text-[22px] leading-[1.42] sm:text-3xl sm:leading-[1.38] lg:text-[36px] lg:leading-[1.35];
+  }
+
+  .section-subtitle {
+    @apply font-body text-base sm:text-lg text-ink-600 leading-[1.75];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 bg-clip-text text-transparent;
+  }
+
+  /* Buttons – one shape, one height scale, used everywhere */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-xl font-display font-semibold transition-all duration-300 ease-out
+      h-14 px-7 text-[17px] sm:text-lg
+      focus-visible:outline-none focus-visible:ring-4 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70;
+  }
+
+  .btn-sm {
+    @apply h-11 px-5 text-base;
+  }
+
+  .btn-primary {
+    @apply bg-brand-400 text-ink shadow-glow hover:bg-brand-300 hover:-translate-y-0.5 focus-visible:ring-brand-200;
+  }
+
+  /* Subtle sheen sweeping across primary buttons */
+  .btn-primary::after {
+    content: '';
+    @apply pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine;
+  }
+
+  .btn-dark {
+    @apply bg-ink text-white hover:bg-ink-800 hover:-translate-y-0.5 focus-visible:ring-ink-400;
+  }
+
+  .btn-outline {
+    @apply border border-ink/15 bg-white text-ink hover:border-ink/30 hover:bg-neutral-50 focus-visible:ring-neutral-200;
+  }
+
+  .btn-whatsapp {
+    @apply border border-[#25D366]/40 bg-[#F0FBF4] text-[#0E7A3E] hover:border-[#25D366] hover:bg-[#E3F8EA] focus-visible:ring-[#25D366]/30;
+  }
+
+  /* Surfaces */
+  .card {
+    @apply rounded-2xl border border-ink/[0.06] bg-white shadow-card;
+  }
+
+  /* Form controls – 16px min font prevents iOS zoom-on-focus */
+  .form-label {
+    @apply mb-1.5 block font-body text-[15px] sm:text-base font-semibold text-ink-700;
+  }
+
+  .form-input {
+    @apply block h-12 sm:h-[52px] w-full rounded-xl border border-neutral-300 bg-white px-4 font-body text-base text-ink placeholder:text-ink-400 outline-none transition
+      focus:border-brand-500 focus:ring-4 focus:ring-brand-100;
+  }
+
+  .form-input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-100;
+  }
+
+  .form-error {
+    @apply mt-1.5 block font-body text-sm text-red-600;
+  }
+
+  /* Legacy helpers kept for backwards compatibility */
+  .inside-text {
+    @apply font-body text-base sm:text-lg text-ink-600 leading-relaxed;
+  }
+
+  .order-text {
+    @apply font-display text-lg sm:text-xl font-semibold text-ink;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pb-safe {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(rgba(20, 17, 15, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .rounded-global {
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
