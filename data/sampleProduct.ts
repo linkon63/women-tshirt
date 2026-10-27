@@ -99,7 +99,7 @@ export const sampleProducts: Product[] = [
             id: 53,
             uom_id: 1,
             unit_price: { value: 1899, currency_code: "BDT" },
-            retail_price: { value: 1499, currency_code: "BDT" },
+            retail_price: { value: 1299, currency_code: "BDT" },
             is_base: true,
           },
         ],
