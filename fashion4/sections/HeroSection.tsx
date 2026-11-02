@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/ProductType";
 import { getProductColorInfo, getProductImage, getProductPrices, formatProductTitle } from "@/utils/productUtils";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface HeroSectionProps {
   products?: Product[];
@@ -35,17 +36,31 @@ const defaultVariants = [
 ];
 
 const HeroSection = ({ products }: HeroSectionProps) => {
-  const titlePart1 =
-    process.env.NEXT_PUBLIC_HERO_TITLE_PART1 || "এই সিজনের স্টাইলে";
-  const titlePart2 =
-    process.env.NEXT_PUBLIC_HERO_TITLE_PART2 || "আনুন নতুনত্ব";
-  const description =
-    process.env.NEXT_PUBLIC_HERO_DESCRIPTION ||
-    "প্রিমিয়াম আরাম ও আধুনিক ফ্যাশনের পারফেক্ট কম্বিনেশন - নিখুঁত ফিনিশিং এবং আকর্ষণীয় ডিজাইন।";
-  const buttonText =
-    process.env.NEXT_PUBLIC_HERO_BUTTON_TEXT || "অর্ডার করুন";
-  const watermarkText =
-    process.env.NEXT_PUBLIC_HERO_WATERMARK || "WESTERN SUIT";
+  const titlePart1 = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HERO_TITLE_PART1,
+    "NEXT_PUBLIC_HERO_TITLE_PART1",
+    "এই সিজনের স্টাইলে"
+  );
+  const titlePart2 = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HERO_TITLE_PART2,
+    "NEXT_PUBLIC_HERO_TITLE_PART2",
+    "আনুন নতুনত্ব"
+  );
+  const description = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HERO_DESCRIPTION,
+    "NEXT_PUBLIC_HERO_DESCRIPTION",
+    "প্রিমিয়াম আরাম ও আধুনিক ফ্যাশনের পারফেক্ট কম্বিনেশন - নিখুঁত ফিনিশিং এবং আকর্ষণীয় ডিজাইন।"
+  );
+  const buttonText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HERO_BUTTON_TEXT,
+    "NEXT_PUBLIC_HERO_BUTTON_TEXT",
+    "অর্ডার করুন"
+  );
+  const watermarkText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HERO_WATERMARK,
+    "NEXT_PUBLIC_HERO_WATERMARK",
+    "WESTERN SUIT"
+  );
 
   // Build variants from API products if available
   const variants =
@@ -99,7 +114,7 @@ const HeroSection = ({ products }: HeroSectionProps) => {
 
   const pricing = activeProduct
     ? getProductPrices(activeProduct)
-    : { sellingPrice: 1499, regularPrice: 1899 };
+    : { sellingPrice: 1499, regularPrice: 1499, hasDiscount: false, discountPercentage: 0 };
 
   const handleSelectVariant = (index: number) => {
     setCurrentIndex(index);
@@ -129,7 +144,11 @@ const HeroSection = ({ products }: HeroSectionProps) => {
       <header className="py-5 sm:py-7 flex items-center justify-center border-b border-neutral-100 bg-white">
         <div className="relative w-44 h-11 sm:w-52 sm:h-12">
           <Image
-            src={process.env.NEXT_PUBLIC_SITE_ICON || "/images/pjfashion.webp"}
+            src={getPublicEnvValue(
+              process.env.NEXT_PUBLIC_SITE_ICON,
+              "NEXT_PUBLIC_SITE_ICON",
+              "/images/pjfashion.webp"
+            )}
             alt="PJ Fashion"
             fill
             className="object-contain"
@@ -173,6 +192,12 @@ const HeroSection = ({ products }: HeroSectionProps) => {
                       }
                     }}
                   />
+
+                  {pricing.hasDiscount && (
+                    <div className="absolute top-3.5 left-3.5 z-10 rounded-full border border-rose-200 bg-rose-600 px-3 py-1.5 text-xs sm:text-sm font-semibold text-white shadow-xs">
+                      {pricing.discountPercentage}% OFF
+                    </div>
+                  )}
 
                   {/* Left / Right Arrow Navigation */}
                   {variants.length > 1 && (
@@ -251,9 +276,11 @@ const HeroSection = ({ products }: HeroSectionProps) => {
 
                   {/* Subtle Price Tag from API */}
                   <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-neutral-200 shadow-xs flex items-center gap-2 z-10">
-                    <span className="text-xs text-neutral-400 line-through font-body">
-                      ৳{pricing.regularPrice}
-                    </span>
+                    {pricing.hasDiscount && (
+                      <span className="text-xs text-neutral-400 line-through font-body">
+                        ৳{pricing.regularPrice}
+                      </span>
+                    )}
                     <span className="text-sm sm:text-base font-semibold text-neutral-900 font-display">
                       ৳{pricing.sellingPrice}
                     </span>

@@ -8,6 +8,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface TestimonialItem {
   src: string;
@@ -21,17 +22,31 @@ const CustomerReviewsSection = () => {
   const nextRef = useRef<HTMLButtonElement>(null);
   const [selectedImage, setSelectedImage] = useState<TestimonialItem | null>(null);
 
-  const title =
-    process.env.NEXT_PUBLIC_TESTIMONIALS_TITLE || "আমাদের কাস্টমার রিভিউ";
-  const whatsappText =
-    process.env.NEXT_PUBLIC_WHATSAPP_TEXT || "যেকোন প্রয়োজনে";
-  const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
-  const whatsappLink =
-    process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
-    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;
-  const buttonText =
-    process.env.NEXT_PUBLIC_REVIEWS_BUTTON_TEXT || "অর্ডার করুন";
+  const title = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_TESTIMONIALS_TITLE,
+    "NEXT_PUBLIC_TESTIMONIALS_TITLE",
+    "আমাদের কাস্টমার রিভিউ"
+  );
+  const whatsappText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_TEXT,
+    "NEXT_PUBLIC_WHATSAPP_TEXT",
+    "যেকোন প্রয়োজনে"
+  );
+  const whatsappPhone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE,
+    "NEXT_PUBLIC_WHATSAPP_PHONE",
+    "+8801342 117722"
+  );
+  const whatsappLink = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_LINK,
+    "NEXT_PUBLIC_WHATSAPP_LINK",
+    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`
+  );
+  const buttonText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_REVIEWS_BUTTON_TEXT,
+    "NEXT_PUBLIC_REVIEWS_BUTTON_TEXT",
+    "অর্ডার করুন"
+  );
 
   const rawTestimonials: TestimonialItem[] = [
     {

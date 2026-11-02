@@ -1,11 +1,19 @@
 "use client";
 
+import { getPublicEnvValue } from "@/utils/publicEnv";
+
 const FooterSection = () => {
-  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
+  const phone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HELPLINE_PHONE,
+    "NEXT_PUBLIC_HELPLINE_PHONE",
+    "01342117722"
+  );
   const currentYear = new Date().getFullYear();
-  const copyright =
-    process.env.NEXT_PUBLIC_FOOTER_COPYRIGHT ||
-    `PJ Fashion © ${currentYear}. All Rights Reserved.`;
+  const copyright = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_FOOTER_COPYRIGHT,
+    "NEXT_PUBLIC_FOOTER_COPYRIGHT",
+    `PJ Fashion © ${currentYear}. All Rights Reserved.`
+  );
 
   return (
     <footer className="bg-white text-neutral-600 py-8 px-4 border-t border-neutral-100 text-center font-body text-xs sm:text-sm">

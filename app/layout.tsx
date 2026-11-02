@@ -4,14 +4,19 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { StoreProvider } from "@/context/StoreContent";
 import Script from "next/script";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 export const metadata: Metadata = {
-  title:
-    process.env.NEXT_PUBLIC_SITE_TITLE ||
-    "প্রিমিয়াম উইমেন্স ওয়েস্টার্ন স্যুট (Western Suit) | PJ Fashion",
-  description:
-    process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ওয়েস্টার্ন স্যুট ২-পিস সেট। চায়না ইম্পোর্টেড Scuda Crave (250 GSM, 95% Polyester, 5% Spandex) ফেব্রিক ও ক্যাশ অন ডেলিভারি সুবিধা।",
+  title: getPublicEnvValue(
+    process.env.NEXT_PUBLIC_SITE_TITLE,
+    "NEXT_PUBLIC_SITE_TITLE",
+    "প্রিমিয়াম উইমেন্স ওয়েস্টার্ন স্যুট (Western Suit) | PJ Fashion"
+  ),
+  description: getPublicEnvValue(
+    process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    "NEXT_PUBLIC_SITE_DESCRIPTION",
+    "মহিলাদের জন্য এক্সক্লুসিভ প্রিমিয়াম কোয়ালিটি ওয়েস্টার্ন স্যুট ২-পিস সেট। চায়না ইম্পোর্টেড Scuda Crave (250 GSM, 95% Polyester, 5% Spandex) ফেব্রিক ও ক্যাশ অন ডেলিভারি সুবিধা।"
+  ),
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -30,7 +35,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MQZHT5MV";
+  const gtmId = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_GTM_ID,
+    "NEXT_PUBLIC_GTM_ID",
+    "GTM-MQZHT5MV"
+  );
 
   return (
     <html lang="bn" suppressHydrationWarning>

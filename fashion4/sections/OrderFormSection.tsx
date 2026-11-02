@@ -8,6 +8,7 @@ import CartItemProduct from "./CartItemProduct";
 import { useRouter } from "next/navigation";
 import { Product, FormErrors, ShippingOption, OrderApiData } from "@/types/ProductType";
 import { getProductColorInfo, getProductImage, getProductPrices, formatProductTitle } from "@/utils/productUtils";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface OrderFormSectionProps {
   products?: Product[];
@@ -32,37 +33,67 @@ const OrderFormSection = ({
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const addressInputRef = useRef<HTMLInputElement>(null);
 
-  const orderTitle =
-    process.env.NEXT_PUBLIC_ORDER_TITLE || "অর্ডার করতে নিচের ফর্মটি পূরণ করুন";
-  const orderSubtitle =
-    process.env.NEXT_PUBLIC_ORDER_SUBTITLE ||
-    "পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ মূল্য পরিশোধ করুন";
-  const buttonText =
-    process.env.NEXT_PUBLIC_ORDER_BUTTON_TEXT || "অর্ডার করুন";
+  const orderTitle = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_ORDER_TITLE,
+    "NEXT_PUBLIC_ORDER_TITLE",
+    "অর্ডার করতে নিচের ফর্মটি পূরণ করুন"
+  );
+  const orderSubtitle = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_ORDER_SUBTITLE,
+    "NEXT_PUBLIC_ORDER_SUBTITLE",
+    "পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ মূল্য পরিশোধ করুন"
+  );
+  const buttonText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_ORDER_BUTTON_TEXT,
+    "NEXT_PUBLIC_ORDER_BUTTON_TEXT",
+    "অর্ডার করুন"
+  );
 
   const [shippingMethod, setShippingMethod] = useState("inside_dhaka");
   const shippingOptions: ShippingOption[] = [
     {
       id: "inside_dhaka",
-      label:
-        process.env.NEXT_PUBLIC_SHIPPING_DHAKA_CITY_LABEL || "ঢাকা শহর",
-      price: Number(process.env.NEXT_PUBLIC_SHIPPING_DHAKA_CITY_PRICE || 70),
+      label: getPublicEnvValue(
+        process.env.NEXT_PUBLIC_SHIPPING_DHAKA_CITY_LABEL,
+        "NEXT_PUBLIC_SHIPPING_DHAKA_CITY_LABEL",
+        "ঢাকা শহর"
+      ),
+      price: Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_SHIPPING_DHAKA_CITY_PRICE,
+          "NEXT_PUBLIC_SHIPPING_DHAKA_CITY_PRICE",
+          "70"
+        )
+      ),
     },
     {
       id: "outskirts_dhaka",
-      label:
-        process.env.NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_LABEL ||
-        "ঢাকার আশেপাশের এলাকা",
+      label: getPublicEnvValue(
+        process.env.NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_LABEL,
+        "NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_LABEL",
+        "ঢাকার আশেপাশের এলাকা"
+      ),
       price: Number(
-        process.env.NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_PRICE || 100
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_PRICE,
+          "NEXT_PUBLIC_SHIPPING_DHAKA_SUBURBS_PRICE",
+          "100"
+        )
       ),
     },
     {
       id: "outside_dhaka",
-      label:
-        process.env.NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_LABEL || "ঢাকার বাইরে",
+      label: getPublicEnvValue(
+        process.env.NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_LABEL,
+        "NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_LABEL",
+        "ঢাকার বাইরে"
+      ),
       price: Number(
-        process.env.NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_PRICE || 130
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_PRICE,
+          "NEXT_PUBLIC_SHIPPING_OUTSIDE_DHAKA_PRICE",
+          "130"
+        )
       ),
     },
   ];
@@ -223,16 +254,47 @@ const OrderFormSection = ({
       const cleanedPhone = phone.replace(/\s|-/g, "");
       const totalAmount = totalPriceOfCartItems() + shippingCharge;
 
-      const baseApi =
-        process.env.NEXT_PUBLIC_API_BASE_URL || API_BASE_URL;
-      const customerId = Number(process.env.NEXT_PUBLIC_CUSTOMER_ID || 1);
-      const channelId = Number(process.env.NEXT_PUBLIC_CHANNEL_ID || 2);
-      const branchId = Number(process.env.NEXT_PUBLIC_BRANCH_ID || 1);
-      const organizationId = Number(
-        process.env.NEXT_PUBLIC_ORGANIZATION_ID || 1
+      const baseApi = API_BASE_URL;
+      const customerId = Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_CUSTOMER_ID,
+          "NEXT_PUBLIC_CUSTOMER_ID",
+          "1"
+        )
       );
-      const uomId = Number(process.env.NEXT_PUBLIC_UOM_ID || 1);
-      const uomCode = process.env.NEXT_PUBLIC_UOM_CODE || "pcs";
+      const channelId = Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_CHANNEL_ID,
+          "NEXT_PUBLIC_CHANNEL_ID",
+          "2"
+        )
+      );
+      const branchId = Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_BRANCH_ID,
+          "NEXT_PUBLIC_BRANCH_ID",
+          "1"
+        )
+      );
+      const organizationId = Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_ORGANIZATION_ID,
+          "NEXT_PUBLIC_ORGANIZATION_ID",
+          "1"
+        )
+      );
+      const uomId = Number(
+        getPublicEnvValue(
+          process.env.NEXT_PUBLIC_UOM_ID,
+          "NEXT_PUBLIC_UOM_ID",
+          "1"
+        )
+      );
+      const uomCode = getPublicEnvValue(
+        process.env.NEXT_PUBLIC_UOM_CODE,
+        "NEXT_PUBLIC_UOM_CODE",
+        "pcs"
+      );
 
       // Formulate detailed size specification note
       const sizeBreakdown = selectedProducts

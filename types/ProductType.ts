@@ -57,6 +57,7 @@ export interface Variant {
   purchasable?: string;
   is_active?: boolean;
   current_pricing?: Pricing;
+  unit_price?: string;
   retailPrice?: string;
   retail_price?: string;
   discountPrice?: string;

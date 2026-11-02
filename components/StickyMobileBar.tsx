@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Product } from "@/types/ProductType";
 import { getProductPrices } from "@/utils/productUtils";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface StickyMobileBarProps {
   products?: Product[];
@@ -12,16 +13,21 @@ interface StickyMobileBarProps {
 export default function StickyMobileBar({ products }: StickyMobileBarProps) {
   const [visible, setVisible] = useState(false);
 
-  const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
-  const whatsappLink =
-    process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
-    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;
+  const whatsappPhone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE,
+    "NEXT_PUBLIC_WHATSAPP_PHONE",
+    "+8801342 117722"
+  );
+  const whatsappLink = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_LINK,
+    "NEXT_PUBLIC_WHATSAPP_LINK",
+    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`
+  );
 
   const pricing =
     products && products.length > 0
       ? getProductPrices(products[0])
-      : { sellingPrice: 1499, regularPrice: 1899 };
+      : { sellingPrice: 1499, regularPrice: 1499, hasDiscount: false, discountPercentage: 0 };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,9 +51,11 @@ export default function StickyMobileBar({ products }: StickyMobileBarProps) {
           <span className="font-display font-semibold text-xl text-neutral-900 leading-none">
             ৳{pricing.sellingPrice}
           </span>
-          <span className="font-body text-xs text-neutral-400 line-through font-normal">
-            ৳{pricing.regularPrice}
-          </span>
+          {pricing.hasDiscount && (
+            <span className="font-body text-xs text-neutral-400 line-through font-normal">
+              ৳{pricing.regularPrice}
+            </span>
+          )}
         </div>
 
         <div className="flex items-center gap-2">

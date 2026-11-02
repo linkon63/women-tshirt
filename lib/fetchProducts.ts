@@ -2,12 +2,19 @@ import { Product, ProductDetailsResponse } from "@/types/ProductType";
 import { API_BASE_URL } from "@/config/general.config";
 import sampleProduct, { sampleProducts } from "@/data/sampleProduct";
 import { formatProductTitle } from "@/utils/productUtils";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 export async function fetchProductById(
   id?: string | number
 ): Promise<Product> {
-  const targetId = id || process.env.NEXT_PUBLIC_PRODUCT_ID || "10";
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || API_BASE_URL;
+  const targetId =
+    id ||
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_PRODUCT_ID,
+      "NEXT_PUBLIC_PRODUCT_ID",
+      "10"
+    );
+  const baseUrl = API_BASE_URL;
 
   try {
     const res = await fetch(`${baseUrl}/products/${targetId}/`, {
@@ -41,19 +48,50 @@ export async function fetchProductById(
 }
 
 export async function fetchLandingProducts(): Promise<Product[]> {
-  const envIds = process.env.NEXT_PUBLIC_PRODUCT_IDS;
+  const envIds = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_PRODUCT_IDS,
+    "NEXT_PUBLIC_PRODUCT_IDS",
+    ""
+  );
   let ids: (string | number)[] = [];
 
   if (envIds) {
     ids = envIds.split(",").map((s) => s.trim()).filter(Boolean);
   } else if (
-    process.env.NEXT_PUBLIC_PRODUCT_ID_1 ||
-    process.env.NEXT_PUBLIC_PRODUCT_ID_2 ||
-    process.env.NEXT_PUBLIC_PRODUCT_ID_3
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_PRODUCT_ID_1,
+      "NEXT_PUBLIC_PRODUCT_ID_1",
+      ""
+    ) ||
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_PRODUCT_ID_2,
+      "NEXT_PUBLIC_PRODUCT_ID_2",
+      ""
+    ) ||
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_PRODUCT_ID_3,
+      "NEXT_PUBLIC_PRODUCT_ID_3",
+      ""
+    )
   ) {
-    if (process.env.NEXT_PUBLIC_PRODUCT_ID_1) ids.push(process.env.NEXT_PUBLIC_PRODUCT_ID_1);
-    if (process.env.NEXT_PUBLIC_PRODUCT_ID_2) ids.push(process.env.NEXT_PUBLIC_PRODUCT_ID_2);
-    if (process.env.NEXT_PUBLIC_PRODUCT_ID_3) ids.push(process.env.NEXT_PUBLIC_PRODUCT_ID_3);
+    const productIds = [
+      getPublicEnvValue(
+        process.env.NEXT_PUBLIC_PRODUCT_ID_1,
+        "NEXT_PUBLIC_PRODUCT_ID_1",
+        ""
+      ),
+      getPublicEnvValue(
+        process.env.NEXT_PUBLIC_PRODUCT_ID_2,
+        "NEXT_PUBLIC_PRODUCT_ID_2",
+        ""
+      ),
+      getPublicEnvValue(
+        process.env.NEXT_PUBLIC_PRODUCT_ID_3,
+        "NEXT_PUBLIC_PRODUCT_ID_3",
+        ""
+      ),
+    ];
+    ids.push(...productIds.filter(Boolean));
   } else {
     ids = [10, 11, 12];
   }
