@@ -4,12 +4,17 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { FiCheck, FiHome, FiPhone } from "react-icons/fi";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 function OrderCompleteContent() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("orderNumber");
   const message = searchParams.get("message");
-  const phone = process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
+  const phone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HELPLINE_PHONE,
+    "NEXT_PUBLIC_HELPLINE_PHONE",
+    "01342117722"
+  );
 
   return (
     <div className="min-h-screen bg-neutral-50/70 flex flex-col justify-center items-center px-4 py-12">

@@ -1,32 +1,61 @@
 "use client";
 
 import Link from "next/link";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 const WhyChooseUsSection = () => {
-  const title =
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_TITLE ||
-    "কেন আমাদের প্রোডাক্ট বেছে নিবেন?";
-  const buttonText =
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_BUTTON_TEXT || "অর্ডার করুন";
-  const whatsappText =
-    process.env.NEXT_PUBLIC_WHATSAPP_TEXT || "যেকোন প্রয়োজনে";
-  const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
-  const whatsappLink =
-    process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
-    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;
+  const title = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHY_CHOOSE_TITLE,
+    "NEXT_PUBLIC_WHY_CHOOSE_TITLE",
+    "কেন আমাদের প্রোডাক্ট বেছে নিবেন?"
+  );
+  const buttonText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHY_CHOOSE_BUTTON_TEXT,
+    "NEXT_PUBLIC_WHY_CHOOSE_BUTTON_TEXT",
+    "অর্ডার করুন"
+  );
+  const whatsappText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_TEXT,
+    "NEXT_PUBLIC_WHATSAPP_TEXT",
+    "যেকোন প্রয়োজনে"
+  );
+  const whatsappPhone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE,
+    "NEXT_PUBLIC_WHATSAPP_PHONE",
+    "+8801342 117722"
+  );
+  const whatsappLink = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_LINK,
+    "NEXT_PUBLIC_WHATSAPP_LINK",
+    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`
+  );
 
   const reasons = [
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_1 ||
-      "আমাদের পণ্যগুলো ১০০% কোয়ালিটিফুল ও কালার গ্যারান্টি।",
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_2 ||
-      "আমরা নিজস্ব তত্ত্বাবধানে অভিজ্ঞ কারিগর দিয়ে নিখুঁত সেলাই ও আধুনিক ফিনিশিং নিশ্চিত করে থাকি।",
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_3 ||
-      "কারণ সরাসরি নিজস্ব ফ্যাক্টরি প্রোডাকশন হওয়ায় অত্যন্ত বাজেট-বান্ধব দামে সেরা প্রোডাক্ট পাচ্ছেন।",
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_4 ||
-      "সারাদেশে দ্রুততম হোম ডেলিভারি এবং পণ্য হাতে পেয়ে চেক করে ক্যাশ অন ডেলিভারিতে মূল্য পরিশোধের সুবিধা।",
-    process.env.NEXT_PUBLIC_WHY_CHOOSE_5 ||
-      "প্রোডাক্টের সাইজ বা ফিটিংসে কোনো সমস্যা হলে ৩ দিনের ভেতরে সম্পূর্ণ ফ্রি এক্সচেঞ্জ সুবিধা পাবেন।",
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_CHOOSE_1,
+      "NEXT_PUBLIC_WHY_CHOOSE_1",
+      "আমাদের পণ্যগুলো ১০০% কোয়ালিটিফুল ও কালার গ্যারান্টি।"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_CHOOSE_2,
+      "NEXT_PUBLIC_WHY_CHOOSE_2",
+      "আমরা নিজস্ব তত্ত্বাবধানে অভিজ্ঞ কারিগর দিয়ে নিখুঁত সেলাই ও আধুনিক ফিনিশিং নিশ্চিত করে থাকি।"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_CHOOSE_3,
+      "NEXT_PUBLIC_WHY_CHOOSE_3",
+      "কারণ সরাসরি নিজস্ব ফ্যাক্টরি প্রোডাকশন হওয়ায় অত্যন্ত বাজেট-বান্ধব দামে সেরা প্রোডাক্ট পাচ্ছেন।"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_CHOOSE_4,
+      "NEXT_PUBLIC_WHY_CHOOSE_4",
+      "সারাদেশে দ্রুততম হোম ডেলিভারি এবং পণ্য হাতে পেয়ে চেক করে ক্যাশ অন ডেলিভারিতে মূল্য পরিশোধের সুবিধা।"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_CHOOSE_5,
+      "NEXT_PUBLIC_WHY_CHOOSE_5",
+      "প্রোডাক্টের সাইজ বা ফিটিংসে কোনো সমস্যা হলে ৩ দিনের ভেতরে সম্পূর্ণ ফ্রি এক্সচেঞ্জ সুবিধা পাবেন।"
+    ),
   ].filter(Boolean);
 
   return (

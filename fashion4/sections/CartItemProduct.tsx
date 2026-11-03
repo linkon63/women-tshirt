@@ -141,15 +141,24 @@ export default function CartItemProduct({
         {/* Details & options */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
-            <h4 className="text-neutral-900 text-sm sm:text-base font-display font-semibold leading-snug">
-              {formatProductTitle(product.name?.en) || colorInfo.name}
-            </h4>
+            <div className="flex flex-wrap items-center gap-2">
+              <h4 className="text-neutral-900 text-sm sm:text-base font-display font-semibold leading-snug">
+                {formatProductTitle(product.name?.en) || colorInfo.name}
+              </h4>
+              {pricing.hasDiscount && (
+                <span className="inline-flex items-center rounded-md border border-rose-200 bg-rose-50 px-2 py-0.5 text-[11px] sm:text-xs font-bold text-rose-700 shadow-xs">
+                  {pricing.discountPercentage}% ছাড়
+                </span>
+              )}
+            </div>
 
             {/* Price from API */}
             <div className="flex items-baseline gap-2">
-              <span className="text-neutral-400 text-xs sm:text-sm line-through font-body font-normal">
-                ৳{pricing.regularPrice}
-              </span>
+              {pricing.hasDiscount && (
+                <span className="text-neutral-400 text-xs sm:text-sm line-through font-body font-normal">
+                  ৳{pricing.regularPrice}
+                </span>
+              )}
               <span className="text-neutral-900 text-base sm:text-lg font-display font-semibold">
                 ৳{pricing.sellingPrice}
               </span>

@@ -4,39 +4,57 @@ import { parsePrice } from "./parsePrice";
 export interface ProductPricingInfo {
   sellingPrice: number;
   regularPrice: number;
+  hasDiscount: boolean;
+  discountPercentage: number;
 }
 
 export const getProductPrices = (
   product: Product,
   variant?: Variant
 ): ProductPricingInfo => {
-  const targetVariant = variant || product.variants?.[0];
+  const targetVariant = (variant || product.selectedVariant ||
+    product.variants?.[0]) as Variant | undefined;
   const up = targetVariant?.unit_prices?.[0];
   const cp = targetVariant?.current_pricing;
 
-  let retail = 0;
-  let unit = 0;
+  const toPrice = (value: unknown): number | undefined => {
+    if (value == null) return undefined;
+    const rawValue =
+      typeof value === "object" && "value" in value
+        ? (value as { value?: string | number }).value
+        : (value as string | number);
+    if (rawValue == null) return undefined;
+    const price = parsePrice(rawValue);
+    return Number.isFinite(price) && price > 0 ? price : undefined;
+  };
 
-  if (up?.retail_price?.value != null) {
-    retail = parsePrice(up.retail_price.value);
-  } else if (cp?.retail_price) {
-    retail = parsePrice(cp.retail_price);
-  } else if (product.retail_price) {
-    retail = parsePrice(product.retail_price);
-  }
+  const discount =
+    toPrice(up?.discount_price) ??
+    toPrice(targetVariant?.discount_price) ??
+    toPrice(cp?.discount_price) ??
+    toPrice(product.discount_price);
+  const retail =
+    toPrice(up?.retail_price) ??
+    toPrice(cp?.retail_price) ??
+    toPrice(targetVariant?.retail_price) ??
+    toPrice(product.retail_price);
+  const unit =
+    toPrice(up?.unit_price) ??
+    toPrice(cp?.unit_price) ??
+    toPrice(targetVariant?.unit_price);
 
-  if (up?.unit_price?.value != null) {
-    unit = parsePrice(up.unit_price.value);
-  } else if (cp?.unit_price) {
-    unit = parsePrice(cp.unit_price);
-  }
-
-  const sellingPrice = retail || unit || 1499;
-  const regularPrice = unit > sellingPrice ? unit : 1899;
+  const sellingPrice = discount ?? retail ?? unit ?? 1499;
+  const regularPrice = discount != null ? retail ?? unit ?? discount : sellingPrice;
+  const hasDiscount = regularPrice > sellingPrice;
+  const discountPercentage = hasDiscount
+    ? Math.round(((regularPrice - sellingPrice) / regularPrice) * 100)
+    : 0;
 
   return {
     sellingPrice,
     regularPrice,
+    hasDiscount,
+    discountPercentage,
   };
 };
 

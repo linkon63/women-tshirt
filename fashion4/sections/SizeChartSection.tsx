@@ -3,32 +3,51 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/ProductType";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface SizeChartSectionProps {
   products?: Product[];
 }
 
 const SizeChartSection = ({ products }: SizeChartSectionProps) => {
-  const title =
-    process.env.NEXT_PUBLIC_SIZE_CHART_TITLE || "সাইজ চার্ট নির্দেশিকা";
-  const noteText =
-    process.env.NEXT_PUBLIC_SIZE_CHART_NOTE ||
-    "অবশ্যই ১০০% কনফার্ম হয়ে অর্ডারটি করবেন। সাইজে প্রবলেম হলে অথবা অন্য কোন সমস্যা হলে রিটার্ন বা এক্সচেঞ্জ করে নিতে পারবেন ৩ দিনের ভেতরে। প্রয়োজনে যোগাযোগ করুনঃ";
-  const phone =
-    process.env.NEXT_PUBLIC_HELPLINE_PHONE || "01342117722";
+  const title = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_SIZE_CHART_TITLE,
+    "NEXT_PUBLIC_SIZE_CHART_TITLE",
+    "সাইজ চার্ট নির্দেশিকা"
+  );
+  const noteText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_SIZE_CHART_NOTE,
+    "NEXT_PUBLIC_SIZE_CHART_NOTE",
+    "অবশ্যই ১০০% কনফার্ম হয়ে অর্ডারটি করবেন। সাইজে প্রবলেম হলে অথবা অন্য কোন সমস্যা হলে রিটার্ন বা এক্সচেঞ্জ করে নিতে পারবেন ৩ দিনের ভেতরে। প্রয়োজনে যোগাযোগ করুনঃ"
+  );
+  const phone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_HELPLINE_PHONE,
+    "NEXT_PUBLIC_HELPLINE_PHONE",
+    "01342117722"
+  );
 
-  const whatsappText =
-    process.env.NEXT_PUBLIC_WHATSAPP_TEXT || "যেকোন প্রয়োজনে";
-  const whatsappPhone =
-    process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+8801342 117722";
-  const whatsappLink =
-    process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
-    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`;
+  const whatsappText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_TEXT,
+    "NEXT_PUBLIC_WHATSAPP_TEXT",
+    "যেকোন প্রয়োজনে"
+  );
+  const whatsappPhone = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_PHONE,
+    "NEXT_PUBLIC_WHATSAPP_PHONE",
+    "+8801342 117722"
+  );
+  const whatsappLink = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHATSAPP_LINK,
+    "NEXT_PUBLIC_WHATSAPP_LINK",
+    `https://wa.me/${whatsappPhone.replace(/[^\d]/g, "")}`
+  );
   const buttonText = "অর্ডার করুন";
 
-  const sizeChartImg =
-    process.env.NEXT_PUBLIC_SIZE_CHART_IMAGE ||
-    "/images/size-guide/SizeGuide_LadiesTop.png";
+  const sizeChartImg = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_SIZE_CHART_IMAGE,
+    "NEXT_PUBLIC_SIZE_CHART_IMAGE",
+    "/images/size-guide/SizeGuide_LadiesTop.png"
+  );
 
 
   return (

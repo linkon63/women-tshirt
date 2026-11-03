@@ -4,36 +4,66 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/ProductType";
 import { getProductImage } from "@/utils/productUtils";
+import { getPublicEnvValue } from "@/utils/publicEnv";
 
 interface WhyDifferentSectionProps {
   products?: Product[];
 }
 
 const WhyDifferentSection = ({ products }: WhyDifferentSectionProps) => {
-  const title =
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_TITLE ||
-    "কেন আমাদের ওয়েস্টার্ন স্যুট অন্যদের থেকে আলাদা";
+  const title = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHY_DIFFERENT_TITLE,
+    "NEXT_PUBLIC_WHY_DIFFERENT_TITLE",
+    "কেন আমাদের ওয়েস্টার্ন স্যুট অন্যদের থেকে আলাদা"
+  );
 
-  const buttonText =
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_BUTTON_TEXT || "অর্ডার করুন";
+  const buttonText = getPublicEnvValue(
+    process.env.NEXT_PUBLIC_WHY_DIFFERENT_BUTTON_TEXT,
+    "NEXT_PUBLIC_WHY_DIFFERENT_BUTTON_TEXT",
+    "অর্ডার করুন"
+  );
 
   const defaultFeatures = [
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_1 ||
-      "চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM)",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_2 ||
-      "ম্যাচিং স্মার্ট ট্রাউজার / প্যান্ট (২-পিস সেট)",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_3 ||
-      "স্টাইলিশ ফ্রন্ট প্রিন্ট ডিজাইন",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_4 ||
-      "প্রিমিয়াম কোয়ালিটি ও নিখুঁত ফিনিশিং",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_5 ||
-      "কালার ও প্রিন্ট ১০০% দীর্ঘস্থায়ী গ্যারান্টি",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_6 ||
-      "নিখুঁত সেলাই ও আরামদায়ক বডি ফিটিংস",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_7 ||
-      "৯৫% পলিয়েস্টার ও ৫% স্প্যানডেক্স হাই-স্ট্রেচ ফেব্রিক",
-    process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_8 ||
-      "M, L, XL, XXL সাইজ ভ্যারিয়েশন",
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_1,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_1",
+      "চায়না ইম্পোর্টেড Scuda Crave ফেব্রিক (250 GSM)"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_2,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_2",
+      "ম্যাচিং স্মার্ট ট্রাউজার / প্যান্ট (২-পিস সেট)"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_3,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_3",
+      "স্টাইলিশ ফ্রন্ট প্রিন্ট ডিজাইন"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_4,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_4",
+      "প্রিমিয়াম কোয়ালিটি ও নিখুঁত ফিনিশিং"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_5,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_5",
+      "কালার ও প্রিন্ট ১০০% দীর্ঘস্থায়ী গ্যারান্টি"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_6,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_6",
+      "নিখুঁত সেলাই ও আরামদায়ক বডি ফিটিংস"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_7,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_7",
+      "৯৫% পলিয়েস্টার ও ৫% স্প্যানডেক্স হাই-স্ট্রেচ ফেব্রিক"
+    ),
+    getPublicEnvValue(
+      process.env.NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_8,
+      "NEXT_PUBLIC_WHY_DIFFERENT_FEATURE_8",
+      "M, L, XL, XXL সাইজ ভ্যারিয়েশন"
+    ),
   ].filter(Boolean);
 
   const fallbackGallery = [
